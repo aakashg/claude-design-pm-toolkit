@@ -7,6 +7,8 @@
 
 **How to use:** Fill in the context block honestly. The more specific you are about the user, the entry point, and what each screen should show, the better the output. Then use Prompt 3b (refinement) after you see the first generation.
 
+> **⚠️ Before sending:** This prompt contains inline "Example:" blocks (italicized text after each screen description). Scrub those out before you hit Send, or Claude will merge your real context with the hiring-example context and produce a Frankenstein output. Search-and-replace `Example: "..."` with empty strings once you've filled in your own context.
+
 ---
 
 ## Prompt 3a — Initial Build
@@ -114,3 +116,27 @@ Once these are applied, prepare the Claude Code handoff bundle. The README shoul
 - Mobile: responsive down to 375px
 - Accessibility: WCAG 2.1 AA
 ```
+
+> See `11_claude_code_handoff.md` for the full README template.
+
+---
+
+## Localization / i18n note
+
+If your product ships in more than one language, add this refinement prompt before handoff:
+
+```
+Wrap every piece of user-facing copy in an i18n-ready function call
+using the pattern t('namespace.key'). Example: instead of
+<button>Create role</button>, output
+<button>{t('onboarding.create_role_cta')}</button>. Group keys by
+screen (onboarding.screen1.headline, etc.). Extract all strings to a
+single en.json file at the top of the output.
+
+Handle RTL (right-to-left) layouts: add `dir="auto"` to the <html>
+tag and use logical CSS properties (padding-inline-start instead of
+padding-left). Icons that indicate direction (arrows, chevrons) get
+`rtl:rotate-180` classes so they mirror in Arabic and Hebrew.
+```
+
+This adds ~60 seconds to the generation but saves hours of retrofit when an engineer has to internationalize the prototype later.
