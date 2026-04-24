@@ -115,3 +115,45 @@ OUTPUT: Single HTML file. All CSS inline as <style> block in <head>. Only extern
 | Feature 3 | Live Pipeline View / See every candidate's stage, score, and next action in one screen — no spreadsheet toggling |
 | Pain point 1 | Manually read through 40+ applications every Monday morning |
 | Solution 1 | Pre-scored stack ranked by fit before you open your laptop |
+
+---
+
+## Analytics hook variants (use as refinement prompts after first generation)
+
+The default page has no analytics wiring. Pick the one matching your stack and paste as a follow-up prompt:
+
+**PostHog:**
+```
+Add PostHog event tracking. Primary CTA click: posthog.capture('launch_hero_cta_clicked', {variant: 'A'}). Email submit: posthog.capture('launch_email_submitted'). Secondary "Watch demo" click: posthog.capture('launch_demo_opened'). Feature card hover: posthog.capture('launch_feature_hovered', {feature_name}). Use the posthog-js library loaded via <script> tag.
+```
+
+**Segment:**
+```
+Add Segment tracking via window.analytics. Wrap every primary CTA click with analytics.track('CTA Clicked', {location: 'launch-hero', variant: 'primary'}). Email submit: analytics.track('Email Captured', {source: 'launch-page'}). Scroll depth: analytics.track('Scroll Depth Reached', {percentage: 50|75|100}).
+```
+
+**Google Analytics 4:**
+```
+Add GA4 tracking via gtag. Primary CTA: gtag('event', 'cta_click', {location: 'launch-hero'}). Email submit: gtag('event', 'generate_lead', {method: 'email-capture'}). Include the GA4 gtag bootstrap snippet in <head> with GA_MEASUREMENT_ID as a placeholder I can replace.
+```
+
+---
+
+## Email capture integration variants (use as refinement prompts)
+
+**ConvertKit:**
+```
+Wire the email input to ConvertKit. Form action: https://app.convertkit.com/forms/[FORM_ID]/subscriptions. Method: POST. On submit: show a success state replacing the form — "You are on the list. Check [email] for a confirmation." with a 400ms fade-in animation. On error: inline error message in red, keep the form visible.
+```
+
+**HubSpot Forms:**
+```
+Wire the email input to a HubSpot Form. Use the hbspt.forms.create script with portalId: [PORTAL], formId: [FORM_ID]. On successful submit: smooth scroll back to the hero and replace the form with the confirmation block. On error: inline error message, retry button.
+```
+
+**Resend (transactional, self-rolled):**
+```
+Wire the email form to POST to /api/capture with {email, source: 'launch'}. On success, show a confirmation block with the user's email. On error, show the error message with a "Try again" link. Include the relevant fetch() code with loading, error, and success states.
+```
+
+Pick one based on your stack. Paste as a follow-up prompt. Claude Design wires it in without re-rendering the page.
