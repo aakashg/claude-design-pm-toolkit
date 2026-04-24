@@ -158,6 +158,79 @@ body {
 }
 ```
 
+### Warm Consumer (for friendly consumer apps — Substack-feel, Arc-feel)
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap');
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #1a1410;
+  background: #fdfaf4; /* warm off-white */
+}
+.heading-warm {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: 'opsz' 80;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+/* Hero: 64px, Section: 40px, Card title: 20px */
+/* Colors in palette: #fdfaf4 (bg), #1a1410 (text), #c2410c (accent orange), #3f6212 (accent olive) */
+```
+
+Use when your brand is warm, human, conversational (a newsletter, a reading app, a journaling tool). Feels opposite to dark-cinematic — soft, grounded, a bit nostalgic.
+
+### Retro Terminal (for developer tools, infrastructure, CLI-adjacent products)
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #0a0a0a;
+  color: #e5e5e5;
+}
+.terminal-heading {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-transform: lowercase;
+}
+.terminal-cursor::after {
+  content: '▌';
+  display: inline-block;
+  color: #22c55e;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+/* Colors: #0a0a0a bg, #e5e5e5 text, #22c55e accent green, #f59e0b warn amber */
+```
+
+Use for CLI tools, developer-facing products, infrastructure platforms. The lowercase monospace heading + cursor reads as "we ship code."
+
+### Playful Consumer (for social apps, games, anything that should feel fun)
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #fef3c7, #fce7f3);
+  color: #1a1a1a;
+}
+.playful-heading {
+  font-family: 'Funnel Display', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+/* Use bright non-neutrals liberally: #f97316, #ec4899, #8b5cf6, #22c55e */
+/* Border-radius generous: 20px on cards, 9999px on everything pill-shaped */
+```
+
+Use for consumer-social, games, creator tools, anything explicitly rejecting the enterprise-minimal aesthetic.
+
 ---
 
 ## Animation Patterns
@@ -310,9 +383,9 @@ document.querySelectorAll('video[data-smooth-loop]').forEach(smoothVideoLoop);
 :root {
   --bg: #09090b;
   --surface: rgba(255, 255, 255, 0.03);
-  --text: #fafafa;
-  --text-muted: rgba(255, 255, 255, 0.55);
-  --text-dim: rgba(255, 255, 255, 0.25);
+  --text: #fafafa;            /* contrast vs --bg: 19.8:1 — passes AAA */
+  --text-muted: rgba(255, 255, 255, 0.55);  /* ~10.5:1 vs --bg — passes AA, fails AAA on body text below 18px */
+  --text-dim: rgba(255, 255, 255, 0.25);    /* ~4.6:1 vs --bg — passes AA on large text only (18px+/14px+ bold), FAILS for body */
   --border: rgba(255, 255, 255, 0.08);
   --border-bright: rgba(255, 255, 255, 0.18);
   --glass-bg: rgba(255, 255, 255, 0.01);
@@ -321,6 +394,8 @@ document.querySelectorAll('video[data-smooth-loop]').forEach(smoothVideoLoop);
   --radius-pill: 9999px;
 }
 ```
+
+**WCAG note:** `--text-dim` is for large display elements only — section labels in 11–14px tracked-wide caps, decorative numbers. Do not use it on body text. For body text, use `--text-muted` (passes AA at 14px+) or `--text` (passes AAA everywhere). When the dark background is replaced with a video, contrast can drop further — re-check before shipping. See `12_error_recovery.md` entry on a11y failures.
 
 ### Clean SaaS (light)
 
