@@ -51,9 +51,22 @@ Getting the hero right is roughly 90% of the visual work. Everything else inheri
 
 ## 6. Plan your token budget before you start.
 
-Daily PM use will hit your Pro plan limits. One heavy session building a complex showcase can burn 95% of a weekly quota. Enable extra usage on Team or Enterprise before your first serious build session, or upgrade to Max tier. Think of each hi-fi artifact as having a per-page cost. A fully built 8-section launch page costs roughly $10–20 in tokens when you include the refinement prompts. The comparison is not "is this cheaper than free" — it is "is this cheaper than a designer's time" and the answer is yes by a significant margin.
+Daily PM use will hit your Pro plan limits. One heavy session building a complex showcase can burn 95% of a weekly quota. Enable extra usage on Team or Enterprise before your first serious build session, or upgrade to Max tier. Think of each hi-fi artifact as having a per-page cost. **A hi-fi page or 10-slide deck runs roughly $2–7 in tokens on the first pass. Heavy sessions with 3+ refinement rounds can run $10–20.** The comparison is not "is this cheaper than free" — it is "is this cheaper than a designer's time" and the answer is yes by a significant margin.
 
 The one trap is using Comments to correct design system errors repeatedly. If Claude keeps getting your brand fonts wrong, it is cheaper to export the design and fix the typography in Figma manually for 10 minutes than to spend 15 token-heavy comment cycles correcting it.
+
+---
+
+## 7. Do not paste customer data into prompts.
+
+Claude Design runs in Anthropic's cloud. Your prompts and uploaded assets are subject to the Anthropic privacy policy. For internal tool prototypes especially, this matters:
+
+- **Do not paste real PII** into sample data fields. Fake names, fake emails, fake user IDs.
+- **Do not paste production API keys or secrets** — even in the Claude Code handoff README, scrub them first.
+- **Do not upload Figma files that contain customer screenshots** without checking with your security team. Trim those frames before uploading.
+- **Check your org's AI data policy** before connecting a production GitHub repo. Most orgs are fine with frontend code; very few are fine with backend or anything that touches PII.
+
+Synthetic data is fine. Realistic-looking-but-fake data is fine. Production data is not. Claude Design's value does not require it.
 
 ---
 
