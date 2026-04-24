@@ -97,15 +97,45 @@ Do NOT re-implement as CSS @keyframes — we use Framer Motion for all animation
 - Do not install new dependencies without asking — we have strict budget on bundle size.
 - Do not change the design. If something looks wrong, flag it in your PR and ask. Design was approved by [DESIGNER / PM] on [DATE].
 
+## Security baseline
+
+- All user input is sanitized before render. Assume any string from a form, URL param, or API response is hostile until escaped.
+- No `dangerouslySetInnerHTML` unless the input is server-validated and explicitly trusted. If unavoidable, sanitize with DOMPurify.
+- No inline event handlers (`onclick="..."`) — use addEventListener or framework patterns.
+- Forms include CSRF protection — use the existing `<CsrfToken>` component or the app's standard pattern.
+- No secrets in client code. API keys, tokens, webhook signing secrets stay server-side. If you find a secret in the design HTML, flag it in the PR — do not check it in.
+- External links open with `rel="noopener noreferrer"` when `target="_blank"`.
+- `Content-Security-Policy` headers must allow any third-party scripts you add (analytics, embeds). If you add a script tag for a new service, also update the CSP allowlist — flag if you do not have access to that config.
+
+## Internationalization (i18n)
+
+- Every user-facing string wraps in our `t('namespace.key')` translation function.
+- Keys follow the pattern: `<feature>.<screen>.<element>` (e.g. `onboarding.review.cta_launch`).
+- Extract all strings to the relevant locale file (`/locales/en.json`) — do not hard-code.
+- Layouts use logical CSS properties (`padding-inline-start`, `margin-block-end`) instead of left/right/top/bottom — supports RTL languages without forking the CSS.
+- Date, number, and currency formatting goes through `Intl` APIs — no hard-coded dollar signs or US date formats.
+- Test in at least one RTL language (Arabic) and one CJK language (Japanese) — these surface character-width and direction bugs that English does not.
+
+## Bundle size budget
+
+- **Net new dependencies:** must justify any new npm package over 5KB gzipped. The PR description includes the bundle size delta and why the dependency is necessary.
+- **Lazy-load:** anything over 30KB that is not needed in the initial render gets dynamic-imported.
+- **Image budget:** all images served via our `<Image>` component (handles AVIF/WebP, sizing). No raw `<img>` tags in production code.
+- **Font budget:** any new font weight loaded must be justified — extra font weights are a common source of bloat. If the design uses 6 weights of a font, ship 3 and use `font-display: swap` to fallback gracefully.
+
 ## Definition of done
 
 - [ ] Renders at 375px, 768px, 1280px without horizontal scroll
 - [ ] All interactions from the design work
 - [ ] Axe accessibility scan passes with 0 violations
 - [ ] Lighthouse performance score ≥ 90
+- [ ] Bundle size delta is within budget (PR description includes the number)
+- [ ] All user-facing strings are wrapped in `t()` and extracted to locales
+- [ ] No security-sensitive patterns introduced (see Security Baseline above)
 - [ ] All new components have Storybook stories
 - [ ] All new interactive elements have `data-testid` attributes
 - [ ] PR includes before/after screenshots at all 3 breakpoints
+- [ ] Tested with `prefers-reduced-motion: reduce` — animations gracefully degrade
 
 ## Questions to ask before coding
 
