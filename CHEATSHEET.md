@@ -130,4 +130,4 @@ See `12_error_recovery.md` for 12 common failures and their fix prompts.
 
 ---
 
-*Toolkit: [github.com/aakashg/claude-design-pm-toolkit](https://github.com/aakashg/claude-design-pm-toolkit) · Newsletter: [news.aakashg.com](https://www.news.aakashg.com)*
+*Toolkit: [github.com/aakashg/claude-design-pm-toolkit](https://github.com/aakashg/claude-design-pm-toolkit) · Article: [news.aakashg.com/p/pm-guide-claude-design](https://www.news.aakashg.com/p/pm-guide-claude-design)*

@@ -1,6 +1,6 @@
 # Claude Design PM Prompt Toolkit
 
-**The prompts, references, and fix-it guides for every PM use case in [The PM's Complete Guide to Claude Design](https://www.news.aakashg.com).**
+**The prompts, references, and fix-it guides for every PM use case in [The PM's Complete Guide to Claude Design](https://www.news.aakashg.com/p/pm-guide-claude-design).**
 
 Built to take you from "I heard about Claude Design" to "I just shipped a prototype my VP asked for" in about 12 minutes. Every file in this repo is copy-paste ready. Customize 2–4 lines. Done.
 
@@ -18,7 +18,7 @@ Built to take you from "I heard about Claude Design" to "I just shipped a protot
 
 ## Start here
 
-1. **If you are brand new to Claude Design:** read the article first → [The PM's Complete Guide to Claude Design](https://www.news.aakashg.com).
+1. **If you are brand new to Claude Design:** read the article first → [The PM's Complete Guide to Claude Design](https://www.news.aakashg.com/p/pm-guide-claude-design).
 2. **If you want every prototype to look like your product:** do [`09_design_system_setup.md`](./09_design_system_setup.md) once. Costs an hour. Pays back on every future generation.
 3. **If you need to ship something today:** jump to the quickstart table below.
 
@@ -140,4 +140,4 @@ MIT. See [`LICENSE`](./LICENSE). Use these prompts in client work, internal tool
 
 ## From the Product Growth newsletter
 
-This toolkit accompanies the Claude Design deep dive in [Product Growth by Aakash Gupta](https://www.news.aakashg.com). Subscribe for weekly PM deep dives.
+This toolkit accompanies the Claude Design deep dive in [Product Growth by Aakash Gupta](https://www.news.aakashg.com/p/pm-guide-claude-design). Subscribe for weekly PM deep dives.
