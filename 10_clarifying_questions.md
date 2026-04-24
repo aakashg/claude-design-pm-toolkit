@@ -150,10 +150,43 @@ How adventurous: Adventurous
 Brand personality: [3 ADJECTIVES, AT LEAST ONE IMPLIES OPPOSITES]
 Copy style: Like [REFERENCE WRITER OR SITE]
 Inspirations: Layout from [X], color from [Y], typography from [Z]
-Do not: [3 EXPLICIT TABOOS]
+Do not visually: [3 EXPLICIT VISUAL TABOOS — e.g. "no gradients, no drop shadows, no stock photography"]
+Words we never use: [5-10 BANNED WORDS — see anti-copy list below]
+CTA vocabulary: [our 3-4 standard CTA verbs — never use anything else]
 ```
 
 This template alone moves your output quality from 60% to 85% on the first generation.
+
+---
+
+## The anti-copy list — words to ban
+
+The single fastest way to make Claude's first-generation copy sound like *your* brand instead of generic SaaS is to tell Claude what words you *never* use. Pick from this list (or write your own) and paste into the "Words we never use" slot above:
+
+**Buzzword bingo (almost always worth banning):**
+- "leverage", "synergy", "robust", "streamline", "powerful"
+- "cutting-edge", "best-in-class", "world-class"
+- "delve", "landscape", "navigate the complexities of"
+- "seamlessly", "effortlessly", "magically"
+- "revolutionary", "game-changing", "next-generation"
+- "empower", "elevate", "transform"
+
+**Generic CTA verbs (specify your alternative):**
+- "Get Started" → "Try it free", "Open the app", "See pricing"
+- "Learn More" → "Read the docs", "See the spec", "Watch the 2-min demo"
+- "Click here" → never, ever — link the words inside the sentence
+
+**Filler phrases:**
+- "We believe that..." (just say what you do)
+- "Our solution..." (it is a product, not a solution)
+- "In today's fast-paced world..." (no)
+- "Designed by humans, built for [audience]" (cliché)
+
+**The brand-specific ban list (the most powerful):**
+- Pick 3-5 words your competitors overuse that you specifically want to differentiate against. Example: a clean-SaaS company might ban "delightful" because half the consumer-app space uses it.
+- Pick 1-2 words your brand has consciously decided not to use. Example: Linear never says "powerful." Stripe never says "easy." Be intentional.
+
+When you tell Claude "we never say 'powerful', 'seamless', 'leverage', or 'unlock' anywhere", the copy gets ~30% more specific on the first generation. PMs who skip this paste get back the same buzzwords and then waste tokens on Edits to fix them.
 
 ---
 
