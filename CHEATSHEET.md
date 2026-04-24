@@ -118,6 +118,8 @@ Using Comments when Edit would work = burning tokens unnecessarily. One of the t
 | "Product Hunt launch with a cinematic hero" | `04_animated_showcase.md` |
 | "Stakeholders need to click through and give feedback" | `08_stakeholder_prototype.md` |
 | "I have an admin tool / ops console to design" | `13_internal_tool.md` |
+| "I'm shipping a PDP / cart / checkout flow" | `14_commerce_page.md` |
+| "I'm running an unmoderated user test" | `15_research_prototype.md` |
 | "I want every prototype to look like my actual product" | `09_design_system_setup.md` (start here, once) |
 
 ---

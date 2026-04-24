@@ -35,6 +35,8 @@ Built to take you from "I heard about Claude Design" to "I just shipped a protot
 | Product Hunt / cinematic showcase | [`04_animated_showcase.md`](./04_animated_showcase.md) | ~45 min |
 | Stakeholder review prototype | [`08_stakeholder_prototype.md`](./08_stakeholder_prototype.md) | ~10 min |
 | Admin tool / ops dashboard | [`13_internal_tool.md`](./13_internal_tool.md) | ~15 min |
+| E-commerce PDP / cart / checkout | [`14_commerce_page.md`](./14_commerce_page.md) | ~12 min |
+| Unmoderated usability test | [`15_research_prototype.md`](./15_research_prototype.md) | ~10 min |
 
 ---
 
@@ -51,6 +53,8 @@ Built to take you from "I heard about Claude Design" to "I just shipped a protot
 | [`07_pitch_deck.md`](./07_pitch_deck.md) | Board update / quarterly deck. 14 slides with speaker notes, exports to PPTX. |
 | [`08_stakeholder_prototype.md`](./08_stakeholder_prototype.md) | Review-ready clickable prototype. Real sample data, step indicator, comment-ready. |
 | [`13_internal_tool.md`](./13_internal_tool.md) | Admin / ops / operator dashboard. Dense, keyboard-first, zero marketing copy. |
+| [`14_commerce_page.md`](./14_commerce_page.md) | E-commerce PDP, mini-cart, single-page checkout. Variant selectors, inventory states, RTL-ready. |
+| [`15_research_prototype.md`](./15_research_prototype.md) | Unmoderated usability test prototype. Task sidebar, completion detection, exit survey. |
 
 ### The references (read once, reuse forever)
 
@@ -63,6 +67,7 @@ Built to take you from "I heard about Claude Design" to "I just shipped a protot
 | [`11_claude_code_handoff.md`](./11_claude_code_handoff.md) | README template for Claude Code handoff. Cuts engineering implementation time in half. |
 | [`12_error_recovery.md`](./12_error_recovery.md) | 12 common failures + copy-paste fix prompts. |
 | [`CHEATSHEET.md`](./CHEATSHEET.md) | Printable 1-pager. Tape above your monitor. |
+| [`CHANGELOG.md`](./CHANGELOG.md) | Version history. What changed and when. Pinned to Claude Design Research Preview, April 2026. |
 
 ---
 
