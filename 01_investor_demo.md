@@ -155,3 +155,29 @@ OUTPUT: Single HTML file. All CSS inline. No external dependencies except Google
 | Metric 4 | $2.1M / ARR |
 | Industry (problem section) | B2B SaaS onboarding |
 | Bold claim | the fastest path from signup to activation |
+
+---
+
+## Board-facing variant (CTA copy swap)
+
+The default CTAs ("See the Product" + "Book a Demo") read consumer / prospect-facing. If you are sending this link to your board or investors rather than prospects, swap the hero CTAs:
+
+- Primary: **"Read the board memo"** (linked to a Google Doc) or **"Open the update"** (linked to a Notion page)
+- Secondary: **"Book 15 min with [founder name]"**
+
+Board members do not "book a demo." They want a deep-dive memo and time with the founder. Same layout, different CTA pattern.
+
+---
+
+## Accessibility note — WCAG contrast on dark video backgrounds
+
+The default text-on-dark in this prompt uses `white/60` and `white/55` against a black background. This is fine on flat black. It may fail WCAG 2.1 AA on some sections where the underlying video is light or varied.
+
+Before sharing the link externally:
+
+1. Open the page at the intended viewing size (stakeholders often open on a laptop, not 4K).
+2. Screenshot and run through a contrast checker (WebAIM's tool or the Stark Figma plugin).
+3. If body copy at white/55 fails: bump to white/75 globally via Tweaks (free, one click). The page stays legible without losing the dark-premium feel.
+4. For any text that overlays a video background directly, increase the dark overlay from `bg-black/25` to `bg-black/40` — this protects legibility on brighter Kling frames.
+
+Do not skip this. A "premium" demo that fails a screen reader or a low-vision reader is not premium. It just failed.
