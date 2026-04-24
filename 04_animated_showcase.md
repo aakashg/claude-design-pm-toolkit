@@ -276,6 +276,52 @@ OUTPUT: Single HTML file. All CSS in a <style> block in <head>. All animations a
 
 ---
 
+## No-video fallback path
+
+If you do not have a Kling or Sedance video ready, or your deadline does not allow for the Mux upload, use this fallback. The page will still look premium — a tasteful CSS-only alternative that ships in 6 minutes instead of 45.
+
+Replace the `BACKGROUND VIDEO` section of the prompt with this:
+
+```
+BACKGROUND (no video):
+Hero section uses an animated CSS gradient background instead of video. Specification:
+
+- Base: radial-gradient at 20% 30% with colors rgba(90,40,150,0.4) fading to transparent over 800px, layered over a linear-gradient from #09090b to #1a1625.
+- Add a subtle animated noise texture via SVG filter (feTurbulence baseFrequency=0.9, opacity 0.03) — creates film-grain feel.
+- Add 3-5 blurred orb shapes (border-radius 50%, backdrop-filter blur 120px, background rgba(accent, 0.15)) positioned absolutely, slowly drifting via CSS animation (translate X/Y by 40px over 20s, ease-in-out, infinite alternate).
+
+The effect should feel like motion without being video. No jumpy loops, no hosting dependency, no mobile bandwidth penalty. Still uses the same gradient fades at top (200px) and bottom (300px) for text legibility.
+```
+
+This fallback is also what to use if you are embedding the prototype in a context where autoplay video is blocked (some email clients, some CMS embeds, iOS low-power mode).
+
+---
+
+## Accessibility — respect `prefers-reduced-motion`
+
+Users with vestibular disorders, migraine triggers, or simply "I find animation distracting" settings need the page to work without the blur/rise/scroll animations. WCAG 2.1 requires this.
+
+Add this refinement prompt after the initial generation:
+
+```
+Add prefers-reduced-motion media query support globally. Inside a
+@media (prefers-reduced-motion: reduce) { ... } block:
+
+- All @keyframes animations get replaced with opacity-only transitions (no transform, no filter, no scale).
+- The word-by-word blur-word animation becomes a simple opacity fade-in with no blur, no translateY, no stagger greater than 30ms.
+- The hover reveal card does not animate — it swaps the screenshot and video on hover instantly, no slide transition.
+- The background video gets paused by default and replaced with the first frame as a static poster image. Add a small "Play background" button in the corner that unpauses it if the user explicitly wants motion.
+- Scroll-triggered fade-rise becomes a simple opacity fade-in, no translateY.
+
+Test by setting macOS System Settings → Accessibility → Display →
+Reduce motion, then reloading the page. Nothing should animate
+beyond a gentle fade.
+```
+
+This is 30 seconds of prompting that prevents your beautiful page from giving a reviewer a migraine. Do not skip it.
+
+---
+
 ## The Framer Motion refinement prompt
 
 Use this after the initial HTML generation if you want smoother, spring-physics animations on the interactive elements:
