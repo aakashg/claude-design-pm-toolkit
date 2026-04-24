@@ -1,7 +1,7 @@
 # Claude Design PM Prompt Toolkit
 ## Reference: Error Recovery — Common Failures + Fix Prompts
 
-When Claude Design produces something broken, the fix almost always falls into one of these 12 patterns. Each has a copy-paste fix prompt. Use these before trying to rebuild from scratch.
+When Claude Design produces something broken, the fix almost always falls into one of these 14 patterns. Each has a copy-paste fix prompt. Use these before trying to rebuild from scratch.
 
 ---
 
@@ -167,7 +167,84 @@ The goal is "intentionally designed" not "template".
 
 ---
 
-## 12. Claude keeps regenerating the same wrong thing
+## 12. Accessibility scan fails (WCAG, Axe, Lighthouse a11y)
+
+**Symptom:** You ran an Axe scan or Lighthouse audit on the generated page and got 5+ violations: low contrast, missing alt text, no focus rings, missing labels.
+
+**Fix prompt (general — covers ~80% of common failures):**
+```
+Run an accessibility pass. Apply globally:
+
+1. Color contrast: every text element must hit WCAG 2.1 AA — 4.5:1 for body text, 3:1 for large text (18px+, or 14px+ bold). If the current --text-muted (white/55) fails on the dark background, bump to white/72 globally. Check overlay text on video backgrounds — increase the dark overlay from bg-black/25 to bg-black/40 if needed.
+
+2. Focus states: every interactive element gets a visible focus ring on :focus-visible. Use a 2px outline in the accent color with a 2px offset. No default browser outline-none anywhere.
+
+3. Alt text: every <img> tag has a meaningful alt attribute. Decorative images get alt="". Icon-only buttons get aria-label. SVG icons get role="img" with a <title> child.
+
+4. Form labels: every input has a corresponding <label> with htmlFor. Placeholder text is not a label substitute — required fields get a visible asterisk and aria-required="true".
+
+5. Heading hierarchy: one <h1> per page. No skipped levels (no h1 → h3). Headings describe the section they label.
+
+6. Keyboard nav: tab order follows visual order. All interactive elements reachable. Esc closes modals. Enter submits primary action.
+
+7. Reduced motion: wrap all animations in @media (prefers-reduced-motion: reduce) — replace transforms with opacity-only fades.
+
+After applying, re-run Axe — there should be 0 critical or serious violations.
+```
+
+**Fix prompt (low-contrast text on video backgrounds specifically):**
+```
+The hero text overlaying the video background fails WCAG contrast.
+Two options, pick one based on aesthetic preference:
+
+Option A (preserve dark video, increase overlay): Increase the dark
+gradient overlay from bg-black/25 to bg-black/45. This shifts the
+video's exposed mid-tones darker and lifts the white text contrast
+above 4.5:1 on most frames.
+
+Option B (text shadow): Add a subtle text-shadow to all overlaying
+text: text-shadow: 0 2px 8px rgba(0,0,0,0.5). This gives white text
+edge contrast even on bright video frames. Use 0.5 opacity at most —
+heavier reads as 2010s.
+
+Test by pausing the video at 3-4 different moments (extract still
+frames, run through a contrast checker against the overlaying text
+color). All passes? Ship. Any failures? Increase further.
+```
+
+---
+
+## 13. prefers-reduced-motion is not respected
+
+**Symptom:** You enabled "Reduce motion" in your OS settings, reloaded the page, and the word-by-word blur animation still runs. Vestibular-disorder reviewers will not trust the page.
+
+**Fix prompt:**
+```
+The page does not honor prefers-reduced-motion. Add to the global
+CSS:
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+Then specifically: pause the background video on mount if matchMedia(
+'(prefers-reduced-motion: reduce)').matches is true — replace the
+playing video with a poster image of frame 0. Show a small "Play
+background" button in the corner that lets the user opt back in.
+
+The word-by-word blur animation should become a single opacity fade
+of 200ms on the whole headline, no per-word stagger, no blur, no
+translateY.
+```
+
+---
+
+## 14. Claude keeps regenerating the same wrong thing
 
 **Symptom:** You used Comments 3 times to fix the same element. Claude keeps reverting.
 
